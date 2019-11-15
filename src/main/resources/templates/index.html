@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Timeline</title>
+</head>
+<style>
+    div#app{
+        border: 2px solid darkcyan;
+        /*border-radius: 8px;*/
+        margin: 10px auto;
+        width: 500px;
+        height: 580px;
+        /*padding: 20px;  !*内边距*!*/
+        margin-top: 0.5cm;
+    }
+
+    div#heading{
+        border-bottom: 2px solid darkcyan;
+        height:100px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:x-large;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .button-1{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background:white;
+        border:2px solid darkcyan;
+        margin-left: 3cm;
+        width: 2.7cm;
+        height: 1cm;
+    }
+    .button-1:hover{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background: mintcream;
+        border:2px solid darkcyan;
+        margin-left: 3cm;
+        width: 2.7cm;
+        height: 1cm;
+    }
+
+    .button-2{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background:white;
+        border:2px solid darkcyan;
+        width: 2.7cm;
+        height: 1cm;
+    }
+    .button-2:hover{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background: mintcream;
+        border:2px solid darkcyan;
+        width: 2.7cm;
+        height: 1cm;
+    }
+
+    .button-3{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background:white;
+        border:2px solid darkcyan;
+        margin-left: 7.8cm;
+        width: 2.7cm;
+        height: 1cm;
+    }
+    .button-3:hover{
+        border-radius: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+        background: mintcream;
+        border:2px solid darkcyan;
+        margin-left: 7.8cm;
+        width: 2.7cm;
+        height: 1cm;
+    }
+
+    div#message{
+        /*position: absolute;*/
+        width: 500px;
+        height: 470px;
+        overflow: auto;
+    }
+
+    .name{
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 20px;
+        margin-top: 10px;
+        width: 100px;
+        float: left;
+        text-align: left;
+    }
+
+    .interval{
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 10px;
+        width: 100px;
+        margin-left: 192px;
+        float: left;
+        text-align: right;
+    }
+
+    .content{
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 5px;
+        margin-left: 15px;
+        margin-right: 30px;  /*想要调整位置，主要是改width和margin-right*/
+        width: 350px;
+        word-wrap:break-word;
+    }
+</style>
+
+<body style="text-align: center">
+
+
+<div id="app">
+    <div id="heading">
+        <a style="margin:60px"><b>Timeline</b></a>
+<!--        <button class="button-1"  @click="update">更新</button>-->
+<!--        <input type="button" value="更新" class="button-1" />-->
+        <button type="button" class="button-1"><a th:href="@{'/update'}">更新</a></button>
+<!--        <button type="button" class="button-1" onclick="update()">更新</button>-->
+        <button type="button" class="button-3"><a th:href="@{'/post'}">插入</a></button>
+<!--        <button type="button" class="button-3" @click="post">插入</button>-->
+    </div>
+<!--    <div id="insert">
+
+&lt;!&ndash;        <button class="button-3" @click="post">插入</button>&ndash;&gt;
+    </div>-->
+
+<!--    <div id="message" >
+        <div v-for="message in messageList">
+            <div>
+                <p class="name">{{message.userName}}</p>
+                <p class="interval">{{message.sendTime}}</p>
+            </div>
+            <p class="content">{{message.content}}</p>
+            <p style="margin-left: -20px">  &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</p>
+        </div>
+    </div>-->
+
+
+
+    <div id="message">
+        <div th:each="message : ${messageList}">
+            <p class="name" th:text="${message.userName}"></p>
+            <p class="interval" th:datetime="${message.sendTime}"></p>
+            <p class="content" th:text="${message.content}"></p>
+            <img th:src="${message.image}" />
+            <span class="need_to_be_rendered load_time strong" th:datetime="${message.sendTime}"></span>
+        </div>
+    </div>
+
+
+
+    <div style="margin-top: 15px">
+<!--        <button class="button-2" @click="load">更多...</button>-->
+        <button type="button" class="button-2"><a href="load">更多</a></button>
+<!--        <button type="button" class="button-2" @click="load">更多</a></button>-->
+    </div>
+</div>
+<!--
+<script th:inline="javascript">
+
+    var updateButton = ${"#button-1"};
+    updateButton.click(function(){
+        $.ajax({
+            url: 'update',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });
+    });
+
+</script>-->
+
+<!--<script type="text/javascript" src="js/timeago/4.0.1/timeago.min.js"></script>-->
+<script src="https://cdn.bootcss.com/timeago.js/3.0.2/timeago.js"></script>
+<script src="js/vue/2.5.16/vue.min.js"></script>
+<script type="text/javascript" src="js/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    var timeagoInstance = timeago();
+    timeagoInstance.render(document.querySelectorAll('.interval'),'zh_CN');
+</script>
+<!--<script type="text/javascript">
+
+    update = function(){
+        $.ajax({
+            url: 'update',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        }).then(function (res) {
+            var i;
+            for(i=0;i < res.length; i++){    //把读取到的毫秒数转化为“刚刚”等描述
+                res[i].sendTime = timeChange(res[i].sendTime);    //timeChange(med)才是返回“刚刚”，med本身不变的。
+            }
+            //把从json获取的数据赋值给数组
+            self.messageList = res;
+        }).fail(function () {
+            console.log('失败');
+        });
+    };
+
+    /*update = function(){
+        return "/update";
+        /!*var url = '/update';
+        $("#app").load(url);*!/
+/!*        $.ajax({
+            url: 'update',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });*!/
+    };*/
+
+    /*$(document).ready(function(){
+        $('.button-1').addEventListener('click',function(){
+            var url = '/update';
+            $("message").load(url);
+        });
+    });
+
+    $("#refresh").submit(function(event){
+        $.ajax({
+            url: 'update',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });
+    });*/
+
+    /*var updateButton = ${"#refresh"};
+    var loadButton = ${"load"};
+    var postButton = ${"post"};
+
+    updateButton.click(function(){
+        $.ajax({
+            url: 'update',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });
+    });
+
+    loadButton.click(function() {
+        $.ajax({
+            url: 'load',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });
+    });
+
+    postButton.click(function{
+        $.ajax({
+            url: 'post',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        });
+    });*/
+
+    /*function load() {
+        $.ajax({
+            url: 'load',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        })
+    }
+
+    function post() {
+        $.ajax({
+            url: 'post',
+            type: 'get',
+            data: {},
+            dataType: 'json'
+        })
+    }*/
+
+</script>-->
+<!--<script>
+    var vue = new Vue({
+        el:"#app",    //必须绑定最大的那个div的id，如果只是绑定message，则两个按钮的功能会失效
+        data: {
+            messageList: []
+        },
+        created: function () {
+            //为了在内部函数能使用外部函数的this对象，要给它赋值了一个名叫self的变量。
+            var self = this;
+            $.ajax({
+                url: 'update',
+                type: 'get',
+                data: {},
+                dataType: 'json'
+            }).then(function (res) {
+                var i;
+                for(i=0;i < res.length; i++){    //把读取到的毫秒数转化为“刚刚”等描述
+                    res[i].sendTime = timeChange(res[i].sendTime);    //timeChange(med)才是返回“刚刚”，med本身不变的。
+                }
+                //把从json获取的数据赋值给数组
+                self.messageList = res;
+            }).fail(function () {
+                console.log('失败');
+            })
+        },
+        methods: {
+            update: function () {
+                var self = this;
+                $.ajax({
+                    url: 'update',
+                    type: 'get',
+                    data: {},
+                    dataType: 'json'
+                }).then(function (res) {
+                    var i;
+                    for (i = 0; i < res.length; i++) {    //把读取到的毫秒数转化为“刚刚”等描述
+                        res[i].sendTime = timeChange(res[i].sendTime);    //timeChange(med)才是返回“刚刚”，med本身不变的。
+                    }
+                    //把从json获取的数据赋值给数组
+                    self.messageList = res;
+                }).fail(function () {
+                    console.log('失败');
+                })
+            },
+            load: function () {
+                var self = this;
+                $.ajax({
+                    url: 'load',
+                    type: 'get',
+                    data: {},
+                    dataType: 'json'
+                }).then(function (res) {
+                    var i;
+                    for (i = 0; i < res.length; i++) {    //把读取到的毫秒数转化为“刚刚”等描述
+                        res[i].sendTime = timeChange(res[i].sendTime);    //timeChange(med)才是返回“刚刚”，med本身不变的。
+                    }
+                    //把从json获取的数据赋值给数组
+                    self.messageList = res;
+                }).fail(function () {
+                    console.log('失败');
+                })
+            },
+            post: function () {
+                var self = this;
+                $.ajax({
+                    url: 'post',
+                    type: 'get',
+                    data: {},
+                    dataType: 'json'
+                }).then(function (res) {
+                    var i;
+                    for (i = 0; i < res.length; i++) {    //把读取到的毫秒数转化为“刚刚”等描述
+                        res[i].sendTime = timeChange(res[i].sendTime);    //timeChange(med)才是返回“刚刚”，med本身不变的。
+                    }
+                    //把从json获取的数据赋值给数组
+                    self.messageList = res;
+                }).fail(function () {
+                    console.log('失败');
+                })
+            }
+        }
+    });
+
+    /*实现时间戳*/
+    function formatDateTime(timeValue) {
+        var date = new Date(timeValue);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+    };
+    //判断传入日期是否为昨天
+    function isYesterday(timeValue) {
+        var date = new Date(); //当前时间
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime(); //今天凌晨
+        var yesterday = new Date(today - 24 * 3600 * 1000).getTime();
+        return timeValue < today && yesterday <= timeValue;
+    };
+    //判断传入日期是否属于今年
+    function isYear (timeValue) {
+        var takeNewYear = formatDateTime(timeValue).substr(0,4); //当前时间的年份
+        var takeTimeValue = formatDateTime(timeValue).substr(0,4); //传入时间的年份
+        return takeTimeValue == takeNewYear;
+    }
+    //60000 1分钟
+    //3600000 1小时
+    //86400000 24小时
+    //对传入时间进行时间转换
+
+    function timeChange(timeValue) {
+        var timeNew = Date.parse(new Date()); //当前时间
+        var timePost = Date.parse(timeValue);
+        var timeDiffer = timeNew - timePost; //与当前时间误差
+        var returnTime = '有东西';
+        if(timeDiffer <= 60000) { //一分钟内
+            var returnTime = '刚刚';
+        } else if(timeDiffer > 60000 && timeDiffer < 3600000) { //1小时内
+            var returnTime = Math.floor(timeDiffer / 60000 )+ '分钟前';
+        } else if(timeDiffer >= 3600000 && timeDiffer < 86400000 && !isYesterday(timePost)) { //今日
+            var returnTime = formatDateTime(timePost).substr(11,5);
+        } else if(timeDiffer > 3600000 && isYesterday(timePost)) { //昨天
+            var returnTime = '昨天'+formatDateTime(timePost).substr(11,5);
+        } else if (timeDiffer > 86400000 && !isYesterday(timePost) && isYear (timePost)){	//今年
+            var returnTime = formatDateTime(timePost).substr(5,11);
+        } else if (timeDiffer > 86400000 && !isYesterday( timePost) && !isYear (timePost)) { //不属于今年
+            var returnTime = formatDateTime(timePost).substr(0,11);
+        }
+        return returnTime;
+    }
+</script>-->
+
+</body>
+</html>
