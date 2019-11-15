@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,17 +23,19 @@ import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.mockito.Mockito.*;
 
+//@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MessageServiceImplTest {
 
     @Mock
-    private MessageRepository messageRepository;
+    MessageRepository messageRepository;
+
     @InjectMocks
-    private MessageService messageService;
+    MessageServiceImpl messageService;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception{
         MockitoAnnotations.initMocks(this);
     }
 
@@ -55,7 +58,7 @@ public class MessageServiceImplTest {
         List<Message> resultList1 = messageService.getMessages(0, 2);
         List<Message> resultList2 = messageService.getMessages(0, 5);
 
-        verify(messageRepository,times(1)).findAll();
+        verify(messageRepository,times(2)).findAll();
         verifyNoMoreInteractions(messageRepository);
 
         assertAll(
