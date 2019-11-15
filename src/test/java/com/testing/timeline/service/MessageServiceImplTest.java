@@ -2,16 +2,13 @@ package com.testing.timeline.service;
 
 import com.testing.timeline.domain.Message;
 import com.testing.timeline.repository.MessageRepository;
-import org.apache.maven.model.License;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.verification.Times;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,10 +22,9 @@ import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.mockito.Mockito.*;
 
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
-class MessageServiceImplTest {
+public class MessageServiceImplTest {
 
     @Mock
     private MessageRepository messageRepository;
@@ -36,21 +32,21 @@ class MessageServiceImplTest {
     private MessageService messageService;
 
     @Before
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void getMessages() {
+    public void getMessages() {
 
         Date d1 = new Date();
         Date d2 = new Date();
         Date d3 = new Date();
 
         List<Message> messageList = new ArrayList<>();
-        Message m1 = new Message("user_1","sample_1",d1);
-        Message m2 = new Message("user_2","sample_2",d2);
-        Message m3 = new Message("user_3","sample_3",d3);
+        Message m1 = new Message("user_1","sample_1",d1,"1");
+        Message m2 = new Message("user_2","sample_2",d2,"2");
+        Message m3 = new Message("user_3","sample_3",d3,"3");
         messageList.add(m1);
         messageList.add(m2);
         messageList.add(m3);

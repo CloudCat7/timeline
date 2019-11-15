@@ -35,11 +35,7 @@ public class MessageServiceImpl implements MessageService {
     public void postMessage(String userName, String content, String imgNum){
 
         Date date = new Date();
-        Message message = new Message();
-        message.setUserName(userName);
-        message.setContent(content);
-        message.setSendTime(date);
-        message.setImage(imgNum);
+        Message message = new Message(userName,content,date,imgNum);
         messageRepository.save(message);
 
     }

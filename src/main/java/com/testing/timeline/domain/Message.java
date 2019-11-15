@@ -25,10 +25,11 @@ public class Message {
 
     }
 
-    public Message(String userName, String content, Date sendTime) {
+    public Message(String userName, String content, Date sendTime, String image) {
         this.userName = userName;
         this.content = content;
         this.sendTime = sendTime;
+        this.image = image;
     }
 
     public String getUserName() {
