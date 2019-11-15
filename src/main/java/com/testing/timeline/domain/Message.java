@@ -21,6 +21,16 @@ public class Message {
 //    private List<String> images;
     private String image;
 
+    public Message(){
+
+    }
+
+    public Message(String userName, String content, Date sendTime) {
+        this.userName = userName;
+        this.content = content;
+        this.sendTime = sendTime;
+    }
+
     public String getUserName() {
         return userName;
     }
