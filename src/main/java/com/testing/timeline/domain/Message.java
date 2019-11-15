@@ -29,7 +29,7 @@ public class Message {
         this.userName = userName;
         this.content = content;
         this.sendTime = sendTime;
-        this.image = image;
+        this.image = "images/" + image +".jpg";;
     }
 
     public String getUserName() {
