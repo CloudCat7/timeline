@@ -33,7 +33,7 @@ class MessageServiceImplTest {
     @Mock
     private MessageRepository messageRepository;
     @InjectMocks
-    private MessageService messageService;
+    private MessageServiceImpl messageService;
 
     @Before
     void setUp() {
@@ -59,7 +59,7 @@ class MessageServiceImplTest {
         List<Message> resultList1 = messageService.getMessages(0, 2);
         List<Message> resultList2 = messageService.getMessages(0, 5);
 
-        verify(messageRepository,times(1)).findAll();
+        verify(messageRepository,times(2)).findAll();
         verifyNoMoreInteractions(messageRepository);
 
         assertAll(
