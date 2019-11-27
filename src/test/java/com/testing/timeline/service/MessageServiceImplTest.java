@@ -2,14 +2,16 @@ package com.testing.timeline.service;
 
 import com.testing.timeline.domain.Message;
 import com.testing.timeline.repository.MessageRepository;
+import org.apache.maven.model.License;
 import org.junit.Before;
-//import org.junit.jupiter.api.Test;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.internal.verification.Times;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -23,16 +25,15 @@ import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.mockito.Mockito.*;
 
-//@RunWith(MockitoJUnitRunner.class)
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class MessageServiceImplTest {
 
     @Mock
-    MessageRepository messageRepository;
-
+    private MessageRepository messageRepository;
     @InjectMocks
-    MessageServiceImpl messageService;
+    private MessageServiceImpl messageService;
 
     @Before
     public void setUp() throws Exception{
