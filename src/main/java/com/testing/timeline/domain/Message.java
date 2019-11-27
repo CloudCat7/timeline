@@ -18,7 +18,6 @@ public class Message {
     private String image;
 
     public Message(){
-
     }
 
     public Message(String userName, String content, Date sendTime, String image) {
