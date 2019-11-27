@@ -77,6 +77,7 @@ public class Message {
         private String username;
         private String content;
         private  Date sendTime;
+        private String image;
 
         public MessageBuilder username(String name) {
             this.username = name;
@@ -92,6 +93,12 @@ public class Message {
             this.sendTime = sendTime;
             return this;
         }
-        public Message build() { return new Message(username,content,sendTime);}
+
+        public MessageBuilder image(String image){
+            this.image=image;
+            return this;
+        }
+
+        public Message build() { return new Message(username,content,sendTime,image);}
     }
 }
