@@ -58,7 +58,7 @@ class MessageRepositoryTest {
             assertEquals("user_1", message.getUserName());
             assertEquals("test_text_1", message.getContent());
             assertEquals(d1,message.getSendTime());
-            assertEquals("1",message.getImage());
+            assertEquals("images/1.jpg",message.getImage());
             count++;
         }
         assertEquals(1, count);
